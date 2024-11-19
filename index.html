@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caja Fuerte Interactiva</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+        .safe-box {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background-color: #333;
+            border: 5px solid #000;
+            border-radius: 10px;
+            position: relative;
+        }
+        .safe-box.locked {
+            background-color: #d9534f; /* Rojo para cerrada */
+        }
+        .safe-box.unlocked {
+            background-color: #5cb85c; /* Verde para abierta */
+        }
+        #status {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        input[type="number"] {
+            padding: 10px;
+            font-size: 1em;
+            width: 150px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Caja Fuerte Interactiva</h1>
+    <div id="status">Caja Fuerte Cerrada</div>
+    <div class="safe-box locked" id="safe-box"></div>
+    <input type="number" id="code-input" placeholder="Ingrese el código" />
+    <button onclick="unlockSafe()">Abrir</button>
+
+    <script>
+        const secretCode = 1234;
+
+        function unlockSafe() {
+            const userCode = parseInt(document.getElementById("code-input").value);
+            const safeBox = document.getElementById("safe-box");
+            const status = document.getElementById("status");
+
+            if (userCode === secretCode) {
+                safeBox.classList.remove("locked");
+                safeBox.classList.add("unlocked");
+                status.innerText = "¡Caja Fuerte Abierta!";
+            } else {
+                safeBox.classList.add("locked");
+                safeBox.classList.remove("unlocked");
+                status.innerText = "Código incorrecto. Intente nuevamente.";
+            }
+        }
+    </script>
+</body>
+</html>
